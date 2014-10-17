@@ -1,6 +1,6 @@
 (function (root, factory) {
-  'use strict';
-  if (typeof define === 'function' && define.amd) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['moment'], factory);
     } else if (typeof exports === 'object') {
@@ -36,7 +36,8 @@
         }
         var matches = text.match(iso8601);
         if (matches === null) {
-            throw '"' + text + '" is an invalid ISO 8601 duration';
+            // text is an invalid ISO 8601 duration, fallback on moment duration function
+            return durationFn.apply(moment, arguments);
         }
         var d = {
             weeks: parseFloat(matches[1], 10),
